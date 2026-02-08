@@ -5,10 +5,10 @@
   "license": "ISC",
   "author": "",
   "type": "module",
- "main": "services/jobs/src/index.js",
+  "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon -r dotenv/config --experimental-json-modules services/jobs/src/index.js",
-   "start": "node services/jobs/src/index.js"
+    "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js",
+    "start": "node services/jobs/src/index.js "
   },
   "dependencies": {
     "cors": "^2.8.6",
