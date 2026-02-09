@@ -1,14 +1,25 @@
 import mongoose from "mongoose";
-import { DB_NAME } from "../constant.js"
+import { DB_NAME } from "../constant.js";
+
+let isConnected = false;
 
 const connectMongoDB = async () => {
-    try {
-        const mongoDBInstance = await mongoose.connect(`${process.env.MONGODB_URI}/${DB_NAME}`)
-        console.log(`\n MongoDB connected succesfully !! DB HOST = ${mongoDBInstance.connection.host}\n`)
-    } catch (error) {
-        console.log("MongoDB Connection Failed \n", error);
-        process.exit(1)
-    }
-}
+    if (isConnected) return;
 
-export { connectMongoDB }
+    try {
+        const mongoDBInstance = await mongoose.connect(
+            `${process.env.MONGODB_URI}/${DB_NAME}`
+        );
+
+        isConnected = true;
+
+        console.log(
+            `MongoDB connected | HOST: ${mongoDBInstance.connection.host}`
+        );
+    } catch (error) {
+        console.error("MongoDB connection failed", error);
+        throw error; // DO NOT exit process in serverless
+    }
+};
+
+export { connectMongoDB };
