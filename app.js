@@ -16,10 +16,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
     cors({
-        origin: process.env.CORS_ORIGIN,
+        origin: "https://job-frontend-sable.vercel.app",
         credentials: true,
     })
 );
+
 
 // ensure DB connection per request (serverless safe)
 app.use(async (req, res, next) => {
